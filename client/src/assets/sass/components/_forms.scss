@@ -11,3 +11,26 @@
     }
     
 }
+
+.options {
+    position: absolute;
+    top: 50px;
+    background-color: #fff;
+    width: 100%;
+    border-radius: $border-radius !important;
+    padding: 20px;
+    &-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        .optionNumb {
+            width: 30px;
+            display: inline-block;
+            text-align: center;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
