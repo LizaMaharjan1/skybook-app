@@ -1,7 +1,7 @@
-.btnb {
+.btn {
     &:active,
     &:focus {
-        box-shadow: none
+        box-shadow: none !important;
     }
 }
 
