@@ -51,3 +51,31 @@ export const getAllHotel = async (req:any, res:any , next:any) => {
         next(error);
     }
 }
+export const countByCity = async (req:any, res:any , next:any) => {
+    const cities = req.query.cities.split(",")
+    try {
+        const list = await Promise.all(cities.map((city:any)=>{
+            return Hotel.countDocuments({city:city})
+        }))
+        res.status(200).json(list)
+    } catch (error) {
+        next(error);
+    }
+}
+export const countByType = async (req:any, res:any , next:any) => {
+
+    try {
+        const hotelCount = await Hotel.countDocuments({type:"hotel"})
+        const appartmentCount = await Hotel.countDocuments({type:"appartment"})
+        const resortCount = await Hotel.countDocuments({type:"resort"})
+        const villaCount = await Hotel.countDocuments({type:"villa"})
+        res.status(200).json([
+            {type:"hotel" , count:hotelCount},
+            {type:"appartment" , count:appartmentCount},
+            {type:"resort" , count:resortCount},
+            {type:"villa" , count:villaCount},
+        ])
+    } catch (error) {
+        next(error);
+    }
+}
