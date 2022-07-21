@@ -10,13 +10,13 @@ import Hotels from '../Hotels/Hotels'
 function MainLayout() {
   return (
     <>
-        <Header />
-        <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/hotels' element={<Hotels />} />
-            <Route path='/contact-us' element={<ContactUs />} />
-        </Routes>
-        <Footer/>
+      <Header />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/hotels' element={<Hotels />} />
+        <Route path='/contact-us' element={<ContactUs />} />
+      </Routes>
+      <Footer />
     </>
   )
 }
