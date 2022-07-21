@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const baseURL = 'https://'
+
+const baseURL = process.env.APP_URL
 
 const axiosInstance = axios.create({
     baseURL: baseURL,

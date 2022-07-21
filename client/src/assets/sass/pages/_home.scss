@@ -31,7 +31,13 @@ main {
         background-image: linear-gradient(to top, #161616, #1313136b, #2e2e2e85, #0f0f0f5c, #1b1b1b00);
     }    
 }
-
+.card-section{
+    &-propertyCard{
+        .card-title{
+            text-transform: capitalize;
+        }
+    }
+}
 .newsletter {
     padding: 10px 50px;
     img {
