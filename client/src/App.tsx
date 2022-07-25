@@ -4,7 +4,7 @@ import './App.scss';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import ContactUs from './pages/Contact/ContactUs';
-import Hotels from './pages/Hotels/Hotels';
+import List from './pages/List/List';
 import MainLayout from './pages/Main/MainLayout';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route index element={<MainLayout />} />
-        <Route path='/hotels' element={<Hotels />} />
+        <Route path='/hotels' element={<List />} />
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/login' element={<Login setIsLoggedin={setIsLoggedin} />} />
         <Route path='/register' element={<Register />} />
