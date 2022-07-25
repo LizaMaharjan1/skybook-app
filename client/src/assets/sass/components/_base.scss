@@ -49,3 +49,41 @@ p ,h1,h2,h3,h4,h5,h6 {
         box-shadow: none;
     }
 }
+
+.loader {
+    display: flex;
+    justify-content: center;
+}
+    
+.loader__item {
+    width: 16px;
+    height: 16px;
+    margin: 4px;
+    background: rgb(240, 223, 72);
+    border-radius: 50%; 
+    list-style: none;
+    animation: animation-loading 1.2s infinite;
+    
+    &:nth-child(1) {
+      animation-delay: -0.3s;
+    }
+    &:nth-child(2) {
+      animation-delay: -0.15s;
+    }
+}
+  
+@keyframes animation-loading {
+    0% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+    80% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(0);
+    }
+      
+}

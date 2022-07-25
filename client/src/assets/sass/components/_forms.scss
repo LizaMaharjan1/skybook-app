@@ -12,6 +12,12 @@
     
 }
 
+.auth-form {
+    .form-control {
+        height: 48px;
+    }
+}
+
 .options {
     position: absolute;
     top: 50px;
@@ -33,4 +39,10 @@
             margin-bottom: 0;
         }
     }
+}
+
+.alert {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }

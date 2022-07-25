@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Dropdown, DropdownButton, Image, Nav, Navbar } from 'react-bootstrap'
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom'
 import Logo from '../../assets/images/logo-rounded.png'
 
 function Header() {
