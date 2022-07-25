@@ -5,10 +5,11 @@ import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router';
 
 function SearchBar() {
     const [openDatePicker, setOpenDatePicker] = useState<boolean>(false)
-
+    const [destination, setDestination] = useState("")
 
     // Date range picker
     const [date, setDate] = useState<any>([
@@ -47,6 +48,11 @@ function SearchBar() {
         })
     }
 
+    const navigate = useNavigate();
+    const handleSearch = () => {
+        navigate('/hotels', { state: { destination, date, option } })
+    }
+
     return (
         <>
             <Container>
@@ -57,9 +63,10 @@ function SearchBar() {
                                 <InputGroup>
                                     <InputGroup.Text id="basic-addon1"><i className="fa-solid fa-hotel"></i></InputGroup.Text>
                                     <Form.Control
-                                        placeholder="Username"
-                                        aria-label="Username"
+                                        placeholder="Search by city"
+                                        aria-label="Search by city"
                                         aria-describedby="basic-addon1"
+                                        onChange={e => setDestination(e.target.value)}
                                     />
                                 </InputGroup>
                             </Col>
@@ -77,6 +84,7 @@ function SearchBar() {
                                                 moveRangeOnFirstSelection={false}
                                                 ranges={date}
                                                 onChange={item => setDate([item.selection])}
+                                                minDate={new Date()}
                                                 className='date-range-picker'
                                             />
                                             <Button variant='default' className='close-date' onClick={() => setOpenDatePicker(false)}><i className="fa-solid fa-xmark"></i></Button>
@@ -128,7 +136,7 @@ function SearchBar() {
                                 </InputGroup>
                             </Col>
                             <Col sm={1}>
-                                <Button variant='primary' type='submit'>Search</Button>
+                                <Button variant='primary' type='submit' onClick={handleSearch}>Search</Button>
                             </Col>
                         </Row>
                     </Form>

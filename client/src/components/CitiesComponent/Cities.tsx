@@ -13,8 +13,12 @@ function CitiesComponent() {
     const [error, setError] = useState(false)
 
     const getHotelByCity = async () => {
-        const response = await axios.get("http://localhost:8800/api/hotels/countByCity?cities=Bali,London,Shanghai")
+        try {
+            const response = await axios.get("http://localhost:8800/api/hotels/countByCity?cities=Bali,London,Shanghai")
         setData(response.data)
+        } catch (error:any) {
+            setError(error)
+        }
     }
     useEffect(() => {
         getHotelByCity()
