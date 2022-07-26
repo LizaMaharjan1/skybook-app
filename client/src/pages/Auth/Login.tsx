@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Alert, Button, Col, Form, Image, InputGroup, Row } from 'react-bootstrap'
 import ReactPlayer from 'react-player'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import Logo from '../../assets/images/logo-rounded.png'
 
 
@@ -110,6 +111,7 @@ function Login() {
                                 />
                             </InputGroup>
                             <Button type='submit' className='mt-3'>Login</Button>
+                            <Link to='/register'>Register</Link>
                         </Form>
                     </div>
                 </Col>

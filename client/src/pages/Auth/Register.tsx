@@ -31,10 +31,11 @@ function Register() {
   }
 
   const submitForm = async(e: any) => {
-    e.preventDefault();
+    e.preventDefault()
+    debugger
     try {
-      const response = await axios.post('localhost:8800/api/auth/register', userData);
-      console.log(response);
+      await axios.post('http://localhost:8800/api/auth/register', userData)
+      navigate('/login')
       
     } catch (error) {
       
@@ -59,7 +60,7 @@ function Register() {
           <div className="auth-form">
             <Image src={Logo} alt='Logo' className='img-fluid' />
             <h3>Login to access the system</h3>
-            <Form onSubmit={submitForm}>
+            <Form onSubmit={submitForm} method='POST'>
               <InputGroup className="mb-3">
                 <InputGroup.Text id="basic-addon2"><i className="fa-solid fa-user"></i></InputGroup.Text>
                 <Form.Control
