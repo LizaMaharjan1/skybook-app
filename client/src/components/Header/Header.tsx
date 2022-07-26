@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Dropdown, DropdownButton, Image, Nav, Navbar } from 'react-bootstrap'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import Logo from '../../assets/images/logo-rounded.png'
 
 function Header() {
+
+  const navigate = useNavigate()
+
+  const logOut = () => {
+    localStorage.removeItem("token")
+    navigate('/login')
+  }
   return (
     <Navbar expand="lg">
       <Container>
@@ -18,15 +25,15 @@ function Header() {
               className="ms-auto my-2 my-lg-0"
             >
               <NavLink to="/" className="nav-link">Home</NavLink>
-              <NavLink to="/hotels" className="nav-link">Hotels</NavLink>
+              {/* <NavLink to="/hotels" className="nav-link">Hotels</NavLink> */}
               <NavLink to="/contact-us" className="nav-link">Contact Us</NavLink>
             </Nav>
           </Navbar.Collapse>
           </div>
           <div className='navbar-acc'>
             <DropdownButton variant='secondary px-2 ms-5' align='end' id="dropdown-basic-button" title={<i className="fa-solid fa-circle-user me-2"></i>}>
-              <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Logout <i className="ms-3 fa-solid fa-arrow-right-from-bracket"></i></Dropdown.Item>
+              <Dropdown.Item href="#">Profile</Dropdown.Item>
+              <Dropdown.Item onClick={logOut}>Logout <i className="ms-3 fa-solid fa-arrow-right-from-bracket"></i></Dropdown.Item>
             </DropdownButton>
           </div>
         </div>

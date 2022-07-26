@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router';
+import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
 
 function ContactUs() {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  }, [])
+
+
   return (
-    <div>ContactUs</div>
+    <>
+      <Header />
+      <div>ContactUs</div>
+      <Footer />
+    </>
+
   )
 }
 

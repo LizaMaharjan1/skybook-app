@@ -5,11 +5,8 @@ import ReactPlayer from 'react-player'
 import { useNavigate } from 'react-router'
 import Logo from '../../assets/images/logo-rounded.png'
 
-interface IProps {
-    setIsLoggedin: (event:boolean) => void
-}
 
-function Login({setIsLoggedin}:IProps) {
+function Login() {
     const navigate = useNavigate()
     if(localStorage.getItem("token")) {
         navigate("/");
@@ -22,8 +19,6 @@ function Login({setIsLoggedin}:IProps) {
         userName: '',
         password: ''
     })
-
-   
 
     const loginHandler = (e: any) => {
         e.preventDefault()
@@ -38,7 +33,6 @@ function Login({setIsLoggedin}:IProps) {
     }
 
     const authenticate = () => {
-        setIsLoggedin(true);
         localStorage.setItem("token", "etrwtreytqrwyqrweytqrweywerqyut")
     }
 
@@ -53,7 +47,6 @@ function Login({setIsLoggedin}:IProps) {
         try {
             const response: any = await axios.post('http://localhost:8800/api/auth/login', payload)
             if (response.status === 200) {
-                localStorage.setItem("isLoggedIn", response?.data?._doc.isAdmin);
                 authenticate();
                 navigate("/")
             }

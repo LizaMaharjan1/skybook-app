@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
-import { useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { format } from 'date-fns';
 import { DateRangePicker } from 'react-date-range';
 import SearchResult from '../../components/SearchItemCard/SearchResult';
 import axios from 'axios';
 import Loader from '../../components/Loader/Loader';
 import API from "../../api-config";
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 
 function List() {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!localStorage.getItem("token")) {
+            navigate("/login");
+        }
+    }, [])
 
     const location: any = useLocation()
 
@@ -45,6 +54,7 @@ function List() {
 
     return (
         <>
+            <Header />
             <Container>
 
                 <div className="listWrapper">
@@ -119,6 +129,7 @@ function List() {
                     </div>
                 </div>
             </Container>
+            <Footer />
         </>
     )
 }

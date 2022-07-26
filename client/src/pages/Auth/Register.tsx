@@ -1,10 +1,20 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Image, InputGroup, Row } from 'react-bootstrap'
 import ReactPlayer from 'react-player'
+import { useNavigate } from 'react-router'
 import Logo from '../../assets/images/logo-rounded.png'
 
 function Register() {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if(localStorage.getItem("token")) {
+      navigate('/login')
+    }
+  }, [])
+  
+
   const [userData, setUserData] = useState({
     userName: '',
     email: '',
