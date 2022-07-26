@@ -1,0 +1,79 @@
+.hotel-desc{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &--title{
+        font-size: 24px;
+        font-weight: 600;
+    }
+    &__address{
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    &--distance{
+        color: #002147;
+        font-weight: 500;
+    }
+    &--priceHighlight{
+        font-weight: 500;
+    }
+    &__images{
+        .row{
+            --bs-gutter-y: 10px;
+            --bs-gutter-x: 10px;
+        }
+        &-wrapper{
+            width: 100%;
+            height: 100%;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    &__details{
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 20px;
+        &--texts{
+            flex:3;
+            h1{
+                font-size: 24px;
+                font-weight: 600;
+            }
+            p{
+                font-size: 14px;
+                margin-top: 20px;
+            }
+        }
+        &--price{
+            flex: 1;
+            background-color: #002147;
+            color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            h1{
+                font-size: 18px;
+            }
+            span{
+                font-size: 14px;
+            }
+            h2{
+                span{
+                    font-size: 20px;
+                    font-weight: 300;
+                    line-height: inherit;
+                }
+            }
+        }
+    }
+}

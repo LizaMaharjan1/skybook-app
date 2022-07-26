@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { useLocation } from 'react-router'
 import { format } from 'date-fns';
 import { DateRangePicker } from 'react-date-range';
 import SearchResult from '../../components/SearchItemCard/SearchResult';
+import axios from 'axios';
+import Loader from '../../components/Loader/Loader';
+import API from "../../api-config";
 
 
 function List() {
@@ -16,18 +19,41 @@ function List() {
 
     const [openDatePicker, setOpenDatePicker] = useState<boolean>(false)
 
+    const [data, setData] = useState<any>([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
+    const [minPrice, setMinPrice] = useState<any>(undefined)
+    const [maxPrice, setMaxPrice] = useState<any>(undefined)
+
+
+    const fetchUrl = `${API.hotel}?city=${destination}&minPrice=${minPrice || 0}&maxPrice=${maxPrice || 999}`;
+    const fetchHotel = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.get(fetchUrl)
+            setData(response.data)
+        } catch (error: any) {
+            setError(error)
+        }
+        setLoading(false);
+    }
+    useEffect(() => {
+        fetchHotel()
+    }, [fetchUrl])
+
+
 
     return (
         <>
             <Container>
-                
+
                 <div className="listWrapper">
                     <div className="search-listing">
                         <h2 className="searchTitle">Search</h2>
                         <Form className="searchItems">
                             <Form.Group className="items" controlId="formBasicEmail">
                                 <Form.Label>Destination</Form.Label>
-                                <Form.Control type="text" placeholder={destination} />
+                                <Form.Control type="text" value={destination} />
                             </Form.Group>
                             <Form.Group className="items" controlId="formBasicEmail">
                                 <Form.Label>Check-in Date</Form.Label>
@@ -53,11 +79,11 @@ function List() {
                                 <div className="px-3">
                                     <Form.Group className="optionItem" controlId="formBasicEmail">
                                         <Form.Label>Min Price <small>per Night</small></Form.Label>
-                                        <Form.Control type="number" />
+                                        <Form.Control type="number" min={0} onChange={e => setMinPrice(e.target.value)} />
                                     </Form.Group>
                                     <Form.Group className="optionItem" controlId="formBasicEmail">
                                         <Form.Label>Max Price <small>per Night</small></Form.Label>
-                                        <Form.Control type="number" />
+                                        <Form.Control type="number" min={0} onChange={e => setMaxPrice(e.target.value)} />
                                     </Form.Group>
                                     <Form.Group className="optionItem" controlId="formBasicEmail">
                                         <Form.Label>Adult</Form.Label>
@@ -73,13 +99,23 @@ function List() {
                                     </Form.Group>
                                 </div>
                             </Form.Group>
-                            <Button variant='primary' type='submit'>Search</Button>
+                            <Button variant='primary' onClick={fetchHotel}>Search</Button>
                         </Form>
                     </div>
                     <div className="search-result">
-                        <SearchResult />
-                        <SearchResult />
-                        <SearchResult />
+                        {
+                            loading ?
+                                <div className='h-100 d-flex align-items-center justify-content-center'>
+                                    <Loader />
+                                </div> :
+                                <>
+                                    {
+                                        data.map((item: any) => (
+                                            <SearchResult item={item} key={item._id} />
+                                        ))
+                                    }
+                                </>
+                        }
                     </div>
                 </div>
             </Container>
