@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { Col, Image, Row } from 'react-bootstrap'
 import ShanghaiImage from '../../assets/images/cities/shanghai.jpg'
 import LondonImage from '../../assets/images/cities/london.jpg'
 import BaliImage from '../../assets/images/cities/bali.jpg'
-import axiosInstance from '../../axios/Axios'
-import axios from 'axios'
 import Loader from '../Loader/Loader'
 
 function CitiesComponent() {
@@ -15,7 +14,7 @@ function CitiesComponent() {
 
     const getHotelByCity = async () => {
         try {
-            const response = await axios.get("http://localhost:8800/api/hotels/countByCity?cities=Bali,London,Shanghai")
+            const response = await axios.get("http://localhost:8800/api/hotels/countByCity?cities=bali,london,shanghai")
             setData(response?.data)
         } catch (err:any) {
             setError(err);

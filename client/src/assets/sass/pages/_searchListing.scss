@@ -1,7 +1,8 @@
 .listWrapper{
-    max-width: 1024px;
     display: flex;
     gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     .search{
         &-listing{
             flex: 1;
@@ -33,6 +34,9 @@
             }
             &>input{
                 border-radius: 4px;
+                &[type=text]{
+                    text-transform: capitalize;
+                }
             }
             span{
                 height: 30px;

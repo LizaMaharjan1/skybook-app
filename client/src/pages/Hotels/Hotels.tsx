@@ -8,6 +8,7 @@ import API from "../../api-config";
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import Loader from '../../components/Loader/Loader';
+import Booking from '../../components/BookingModal/Booking';
 
 function Hotels() {
 
@@ -19,15 +20,24 @@ function Hotels() {
   const location: any = useLocation();
   const id = location.pathname.split('/')[2]
 
+  const totalDays: any = localStorage.getItem('totalDays');
+  const roomCount: any = localStorage.getItem('roomCount');
+
+
+  //For booking modal
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
   const hotelDetails = async () => {
     const response = await axios.get(`${API.hotel}/find/${id}`)
     setData(response.data)
+    console.log(data);
+
   }
 
   useEffect(() => {
     hotelDetails()
   }, [])
-  
+
   return (
     <>
       <Header />
@@ -36,12 +46,12 @@ function Hotels() {
           loading ?
             <div className='h-100 d-flex align-items-center justify-content-center'>
               <Loader />
-            </div> 
+            </div>
             :
             <div className="hotel-desc">
               <div className="d-flex align-item-center justify-content-between">
                 <h1 className='hotel-desc--title'>{data.name}</h1>
-                <Button>Reserve or Book now!</Button>
+                <Button onClick={handleShow}>Reserve or Book now!</Button>
               </div>
               <div className="hotel-desc__address">
                 <i className="fa-solid fa-location-dot"></i>
@@ -72,19 +82,20 @@ function Hotels() {
                   </p>
                 </div>
                 <div className="hotel-desc__details--price">
-                  <h1>Perfect for 9-night stay!</h1>
+                  <h1>Perfect for {totalDays}-night stay!</h1>
                   <span>
                     This property has 4.5 rating
                   </span>
                   <h2>
-                    <strong>$300</strong> <span>(9 nights)</span>
+                    <strong>${data.cheapestPrice * totalDays * roomCount}</strong> <span>({totalDays} nights)</span>
                   </h2>
-                  <Button>Reserve or Book Now!</Button>
+                  <Button onClick={handleShow}>Reserve or Book Now!</Button>
                 </div>
               </div>
             </div>
         }
       </Container>
+      <Booking show={show} hide={() => setShow(false)} />
       <Footer />
     </>
   )

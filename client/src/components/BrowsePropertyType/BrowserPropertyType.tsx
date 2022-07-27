@@ -22,7 +22,6 @@ function BrowserPropertyType() {
         try {
             const response = await axios.get("http://localhost:8800/api/hotels/countByType")
             setPropertyData(response && response.data)
-            console.log(propertyData);
         } catch (error: any) {
             setError(error)
         }

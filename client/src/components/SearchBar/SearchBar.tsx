@@ -48,10 +48,24 @@ function SearchBar() {
         })
     }
 
+    // For changing selected dates into total days
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+
+    const dayCalculate = (sDate: any, eDate: any) => {
+        const timeDiff = Math.abs(eDate?.getTime() - sDate?.getTime())
+        const dayDiff = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+        return dayDiff;
+    }
+
+    const totalDays:any = dayCalculate(date[0].startDate , date[0].endDate)
+
     const navigate = useNavigate();
     const handleSearch = () => {
         navigate('/hotels', { state: { destination, date, option } })
+        localStorage.setItem("totalDays", totalDays)
+        localStorage.setItem("roomCount", option.room)
     }
+
 
     return (
         <>
