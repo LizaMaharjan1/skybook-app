@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Alert, Button, Col, Form, Image, InputGroup, Row } from 'react-bootstrap'
 import ReactPlayer from 'react-player'
 import { useNavigate } from 'react-router'
@@ -9,9 +9,14 @@ import Logo from '../../assets/images/logo-rounded.png'
 
 function Login() {
     const navigate = useNavigate()
-    if(localStorage.getItem("token")) {
-        navigate("/");
-    }
+
+    useEffect(() => {
+        if(localStorage.getItem("token")) {
+            navigate("/");
+        }
+    }, [])
+    
+    
     const [alertShow, setAlertShow] = useState<boolean>(false)
     const [errorMsg, setErrorMsg] = useState<string>('')
     const [errorObj, setErrorObj] = useState<any>()
