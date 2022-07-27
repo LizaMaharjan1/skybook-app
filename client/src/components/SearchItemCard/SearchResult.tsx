@@ -32,7 +32,7 @@ function SearchResult(props: any) {
                     }
                     <div className="details-texts">
                         <span>${props.item.cheapestPrice}</span>
-                        <Link to='/hotels/id' className='btn btn-primary'>
+                        <Link to={`/hotels/${props.item._id}`} className='btn btn-primary'>
                             See availability
                         </Link>
                     </div>

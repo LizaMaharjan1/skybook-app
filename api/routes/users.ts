@@ -1,7 +1,6 @@
 import express from 'express'
 import { verify } from 'jsonwebtoken';
 import { updateUser, deleteUser, getUserByID, getAllUser } from '../controllers/user'
-import { verifyAdmin, verifyToken, verifyUser } from '../utils/verifyToken'
 
 const router = express.Router();
 
@@ -19,15 +18,15 @@ const router = express.Router();
 // })
 
 //UPDATE
-router.put("/:id", verifyUser, updateUser)
+router.put("/:id", updateUser)
 
 //DELETE
-router.delete("/:id", verifyUser, deleteUser)
+router.delete("/:id", deleteUser)
 
 //GET
-router.get("/:id", verifyUser, getUserByID)
+router.get("/:id", getUserByID)
 
 //GETALL
-router.get("/", verifyAdmin, getAllUser)
+router.get("/", getAllUser)
 
 export default router
