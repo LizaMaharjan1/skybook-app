@@ -110,8 +110,8 @@ function Login() {
                                     required
                                 />
                             </InputGroup>
-                            <Button type='submit' className='mt-3'>Login</Button>
-                            <Link to='/register'>Register</Link>
+                            <Button type='submit' className='mt-3 d-block w-100'>Login</Button>
+                            <h6 className='mt-4'>Don't have an account? <Link to='/register' className='text-info text-decoration-none'>Register</Link></h6>
                         </Form>
                     </div>
                 </Col>

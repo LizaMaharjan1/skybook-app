@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Image, InputGroup, Row } from 'react-bootstrap'
 import ReactPlayer from 'react-player'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import Logo from '../../assets/images/logo-rounded.png'
 
 function Register() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     if(localStorage.getItem("token")) {
@@ -34,10 +36,13 @@ function Register() {
     e.preventDefault()
     debugger
     try {
-      await axios.post('http://localhost:8800/api/auth/register', userData)
-      navigate('/login')
+      const response = await axios.post('http://localhost:8800/api/auth/register', userData)
+      if(response.status === 200) {
+        navigate('/login')
+      }
       
     } catch (error) {
+      console.log(error);
       
     }
   }
@@ -94,7 +99,8 @@ function Register() {
                   required
                 />
               </InputGroup>
-              <Button type='submit' className='mt-3'>Register</Button>
+              <Button type='submit' className='mt-3 d-block w-100'>Register</Button>
+              <h6 className='mt-4'>Already have an account? <Link to='/login' className='text-info text-decoration-none'>Login</Link></h6>
             </Form>
           </div>
         </Col>
