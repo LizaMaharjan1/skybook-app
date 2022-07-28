@@ -95,7 +95,7 @@ function Hotels() {
             </div>
         }
       </Container>
-      <Booking show={show} hide={() => setShow(false)} />
+      <Booking show={show} hide={() => setShow(false)} hotelId={id} />
       <Footer />
     </>
   )

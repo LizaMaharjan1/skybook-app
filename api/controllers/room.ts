@@ -1,15 +1,15 @@
 import Hotel from '../models/Hotel'
 import Room from '../models/Room'
-import {createError} from '../utils/error'
+import { createError } from '../utils/error'
 
-export const createRoom = async (req:any,res:any ,next:any)=>{
+export const createRoom = async (req: any, res: any, next: any) => {
     const hotelId = req.params.hotelId;
     const newRoom = new Room(req.body)
 
     try {
         const savedRoom = await newRoom.save()
         try {
-            await Hotel.findByIdAndUpdate(hotelId, {$push : {rooms:savedRoom.id}})
+            await Hotel.findByIdAndUpdate(hotelId, { $push: { rooms: savedRoom.id } })
         } catch (error) {
             next(error)
         }
@@ -20,7 +20,7 @@ export const createRoom = async (req:any,res:any ,next:any)=>{
 }
 
 //UPDATING ROOMS
-export const updateRoom = async (req:any, res:any , next:any) => {
+export const updateRoom = async (req: any, res: any, next: any) => {
     try {
         const updatedRoom = await Room.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
         res.status(200).json(updatedRoom)
@@ -29,13 +29,29 @@ export const updateRoom = async (req:any, res:any , next:any) => {
     }
 }
 
+//UPDATING ROOMS Availability
+export const updateRoomAvailability = async (req: any, res: any, next: any) => {
+    try {
+        await Room.updateOne({ "roomNumbers._id": req.params.id },
+            {
+                $push: {
+                    'roomNumbers.$.unavailableDates': req.body.date
+                }
+            }
+        )
+        res.status(200).json("Room status has been updated.");
+    } catch (error) {
+        next(error)
+    }
+}
+
 //DELETING ROOM
-export const deleteRoom = async (req:any, res:any , next:any) => {
+export const deleteRoom = async (req: any, res: any, next: any) => {
     const hotelId = req.params.hotelId;
     try {
         await Room.findByIdAndDelete(req.params.id)
         try {
-            await Hotel.findByIdAndUpdate(hotelId, {$pull : {rooms:req.params.id}})
+            await Hotel.findByIdAndUpdate(hotelId, { $pull: { rooms: req.params.id } })
         } catch (error) {
             next(error)
         }
@@ -46,7 +62,7 @@ export const deleteRoom = async (req:any, res:any , next:any) => {
 }
 
 //GETING ROOM BY ID
-export const getRoomByID = async (req:any, res:any , next:any) => {
+export const getRoomByID = async (req: any, res: any, next: any) => {
     try {
         const room = await Room.findById(req.params.id)
         res.status(200).json(room)
@@ -56,7 +72,7 @@ export const getRoomByID = async (req:any, res:any , next:any) => {
 }
 
 //GETTING ALL ROOM
-export const getAllRoom = async (req:any, res:any , next:any) => {
+export const getAllRoom = async (req: any, res: any, next: any) => {
     try {
         const rooms = await Room.find()
         res.status(200).json(rooms)
