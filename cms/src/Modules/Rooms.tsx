@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom'
+import RoomsTable from '../Components/Tables/Rooms.table';
 
 function Rooms() {
   const navigate = useNavigate()
@@ -13,9 +14,11 @@ function Rooms() {
   return (
     <div>
       <div className="section-head">
-          <h3>Rooms</h3>
-          <Link to='/' className='btn btn-primary'><i className="fa-solid fa-plus ms-2"></i> Add New</Link>
-        </div>
+        <h3>Rooms</h3>
+        <Link to='/' className='btn btn-primary'><i className="fa-solid fa-plus ms-2"></i> Add New</Link>
+      </div>
+
+      <RoomsTable />
     </div>
   )
 }

@@ -1,23 +1,34 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
-import API from '../../api-config'
-import { getAllHotels } from '../../redux/actionCreator/userActionCreator'
+import axiosInstance from '../../api/axios'
+import { getAllHotels } from '../../redux/actionCreator/hotelActionCreator'
 import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks'
+import ConfirmationModal from '../Modals/ConfirmationModal'
 
 function HotelsTable() {
-    const [data, setData] = useState([])
+    const [showModal, setShowModal] = useState<boolean>(false)
+    const [hotelId, setHotelId] = useState<number>(0)
+
     const [error, setError] = useState('')
 
-    const deleteHotel = async (id: any) => {
+    const dispatch = useAppDispatch()
+
+    const closeModal = () => {
+        setShowModal(false)
+    }
+
+    const deleteHotel = async (hotelId: any) => {
         try {
-            await axios.delete(`${API.hotel}/${id}`)
-            setData(data.filter((item: any) => item._id !== id))
+            const response = await axiosInstance.delete(`/hotels/${hotelId}`);
+            if (response.status === 200) {
+                setShowModal(false)
+                dispatch(getAllHotels({}));
+            }
         } catch (error: any) {
             setError(error)
         }
     }
-    const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(getAllHotels({}))
@@ -27,6 +38,13 @@ function HotelsTable() {
 
     return (
         <div>
+            <ConfirmationModal
+                showModal={showModal}
+                title="Delete Hotel"
+                description="Are you sure you want to delete this hotel?"
+                action={() => deleteHotel(hotelId)}
+                closeModal={closeModal}
+            />
             <Table striped bordered className='mt-4'>
                 <thead>
                     <tr>
@@ -49,7 +67,10 @@ function HotelsTable() {
                                 <td>{hotel.city}</td>
                                 <td>
                                     <Button variant='secondary' className='me-3'>Edit</Button>
-                                    <Button onClick={deleteHotel.bind(null, hotel._id)} variant='danger'>Delete</Button>
+                                    <Button onClick={()=>{
+                                        setShowModal(true);
+                                        setHotelId(hotel._id)
+                                    }} variant='danger'>Delete</Button>
                                 </td>
                             </tr>
                         ))

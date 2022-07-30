@@ -16,3 +16,11 @@ export const getAllHotels = createAsyncThunk<any,any>(
         return response?.data
     }
 )
+
+export const getAllRooms = createAsyncThunk<any,any>(
+    'hotels/getAllRooms', 
+    async() => {
+        const response = await axiosInstance.get('/rooms')
+        return response?.data
+    }
+)
