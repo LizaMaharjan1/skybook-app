@@ -3,7 +3,7 @@
     // box-shadow: rgba(0, 0, 0, 15%) 1.95px 1.95px 2.6px;
     height: 100vh;
     background: $secondary-color;
-    position: sticky;
+    position: fixed;
     &__items{
         list-style: none;
         padding-left: 10px;

@@ -14,9 +14,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className='d-flex'>
+      <div className='d-flex main-body-content'>
         <Sidebar />
-        <main className='flex-grow-1 p-4'>
+        <main className='flex-grow-1 p-4 content-display'>
           <Routes>
             <Route path='/' element={<Dashboard />} />
             <Route path='/login' element={<Login />} />

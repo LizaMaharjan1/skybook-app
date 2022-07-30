@@ -15,7 +15,7 @@ function Header() {
         } else {}
     }, [isAdmin])
     return (
-        <Navbar bg="light" expand="lg" className={`${isAdmin ? '' : 'd-none'}`}>
+        <Navbar bg="light" expand="lg" className={`${isAdmin ? 'cms-navbar' : 'd-none'}`}>
             <Container fluid>
                 <Navbar.Brand href="#home">SkyBook - CMS</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
