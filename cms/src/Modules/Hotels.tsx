@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Table } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import Loader from '../Components/Loader/Loader'
 import HotelsTable from '../Components/Tables/Hotels.table'
@@ -9,12 +8,13 @@ function Hotels() {
 
   const [loading, setLoading] = useState(false)
   
-
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
     }
   }, [])
+
+
   return (
     <div>
       <div className="section-head">

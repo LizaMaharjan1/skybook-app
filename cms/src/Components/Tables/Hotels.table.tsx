@@ -2,19 +2,12 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import API from '../../api-config'
+import { getAllHotels } from '../../redux/actionCreator/userActionCreator'
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks'
 
 function HotelsTable() {
     const [data, setData] = useState([])
     const [error, setError] = useState('')
-
-    const fetchAllHotel = async () => {
-        try {
-            const response = await axios.get(`${API.hotel}`)
-            setData(response.data)
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     const deleteHotel = async (id: any) => {
         try {
@@ -24,11 +17,14 @@ function HotelsTable() {
             setError(error)
         }
     }
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        fetchAllHotel()
-    }, [])
-    
+        dispatch(getAllHotels({}))
+    }, [dispatch])
+
+    const { hotelData, hotelLoading } = useAppSelector((state) => state.hotelsReducer)
+
     return (
         <div>
             <Table striped bordered className='mt-4'>
@@ -44,16 +40,16 @@ function HotelsTable() {
                 </thead>
                 <tbody>
                     {
-                        data.map((item: any) => (
-                            <tr key={item._id}>
-                                <td>{item._id}</td>
-                                <td>{item.name}</td>
-                                <td>{item.type}</td>
-                                <td>{item.title}</td>
-                                <td>{item.city}</td>
+                        hotelData?.map((hotel: any, index: number) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{hotel.name}</td>
+                                <td>{hotel.type}</td>
+                                <td>{hotel.title}</td>
+                                <td>{hotel.city}</td>
                                 <td>
                                     <Button variant='secondary' className='me-3'>Edit</Button>
-                                    <Button onClick={deleteHotel.bind(null, item._id)} variant='danger'>Delete</Button>
+                                    <Button onClick={deleteHotel.bind(null, hotel._id)} variant='danger'>Delete</Button>
                                 </td>
                             </tr>
                         ))
