@@ -1,0 +1,38 @@
+.sidebar{
+    max-width: 200px;
+    box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+    height: 100vh;
+    background: $secondary-color;
+    &__items{
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+        li{
+            list-style: none;
+            padding-left: 0;
+            a{
+                width: 100%;
+                color: #fff;
+                text-decoration: none;
+                font-size: 16px;
+                display: block;
+                padding: 10px 15px;
+                transition: 0.2s ease-in-out;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                &:hover{
+                    margin-left: 10px;
+                }
+                &.active{
+                    background-color: #fff;
+                    color: $secondary-color;
+                    border-radius: 20px 0 0 20px;
+                    &:hover{
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

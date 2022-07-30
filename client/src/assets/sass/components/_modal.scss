@@ -2,7 +2,7 @@
     .modal-header{
         justify-content: center;
         border-bottom: 0;
-        background: #002147;
+        background: $secondary-color;
         padding: 10px;
         .modal-title{
             font-size: 20px;
@@ -11,7 +11,7 @@
         }
     }
     .modal-body{
-        background: #002147;
+        background: $secondary-color;
         color: #fff;
     }
     .book--items{
@@ -64,7 +64,7 @@
     }
 
     .modal-footer{
-        background: #002147;
+        background: $secondary-color;
         padding: 10px;
         justify-content: center;
         
