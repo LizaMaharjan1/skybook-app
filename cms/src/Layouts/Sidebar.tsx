@@ -4,25 +4,20 @@ import { Link, NavLink } from 'react-router-dom'
 
 function Sidebar() {
     return (
-        <div className='sidebar'>
-            <div className="logo">
-                <Link to='/'>
-                    <Image src="aasda.png" />
-                </Link>
-            </div>
+        <div className='sidebar py-5'>
             <div className="nav-items">
                 <ul className='sidebar__items'>
                     <li>
                         <NavLink to='/'><i className="fa-solid fa-house"></i>Dashboard</NavLink>
                     </li>
                     <li>
-                        <NavLink to='/hotel'><i className="fa-solid fa-hotel"></i>Hotels</NavLink>
+                        <NavLink to='/hotels'><i className="fa-solid fa-hotel"></i>Hotels</NavLink>
                     </li>
                     <li>
-                        <NavLink to='/room'><i className="fa-solid fa-booth-curtain"></i>Rooms</NavLink>
+                        <NavLink to='/rooms'><i className="fa-solid fa-person-shelter"></i>Rooms</NavLink>
                     </li>
                     <li>
-                        <NavLink to='/user'><i className="fa-solid fa-user-gear"></i>User</NavLink>
+                        <NavLink to='/users'><i className="fa-solid fa-user-gear"></i>User</NavLink>
                     </li>
                 </ul>
             </div>
