@@ -3,16 +3,17 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 
 function Header() {
-    const [isAdmin, setIsAdmin] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(true)
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (!localStorage.getItem("token")) {
-            navigate("/login");
-        } else {
+        if (localStorage.getItem("token")) {
             setIsAdmin(true)
-        }
-    }, [])
+        } else if (!localStorage.getItem("token")) {
+            setIsAdmin(false)
+            navigate("/login");
+        } else {}
+    }, [isAdmin])
     return (
         <Navbar bg="light" expand="lg" className={`${isAdmin ? '' : 'd-none'}`}>
             <Container fluid>
