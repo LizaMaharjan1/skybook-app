@@ -19,7 +19,7 @@ function Hotels() {
     <div>
       <div className="section-head">
         <h3>Hotels</h3>
-        <Link to='/' className='btn btn-primary'><i className="fa-solid fa-plus ms-2"></i> Add New</Link>
+        <Link to='/hotels/create' className='btn btn-primary'><i className="fa-solid fa-plus ms-2"></i> Add New</Link>
       </div>
       {
         loading ?
