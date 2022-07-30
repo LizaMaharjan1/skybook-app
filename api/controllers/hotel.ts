@@ -45,6 +45,15 @@ export const getHotelByID = async (req:any, res:any , next:any) => {
 
 //GETTING ALL HOTEL and filter query
 export const getAllHotel = async (req:any, res:any , next:any) => {
+    try {
+        const hotels = await Hotel.find()
+        res.status(200).json(hotels)
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const getAllHotelFilter = async (req:any, res:any , next:any) => {
     const { minPrice, maxPrice, ...others } = req.query;
     try {
         const hotels = await Hotel.find(

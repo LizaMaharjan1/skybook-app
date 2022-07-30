@@ -35,7 +35,7 @@ function List() {
     const [maxPrice, setMaxPrice] = useState<any>(undefined)
 
 
-    const fetchUrl = `${API.hotel}?city=${destination}&minPrice=${minPrice || 0}&maxPrice=${maxPrice || 999}`;
+    const fetchUrl = `${API.hotel}/filter?city=${destination}&minPrice=${minPrice || 0}&maxPrice=${maxPrice || 999}`;
     const fetchHotel = async () => {
         setLoading(true);
         try {
