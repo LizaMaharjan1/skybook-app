@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image } from 'react-bootstrap'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function Sidebar() {
+    const [isAdmin, setIsAdmin] = useState(false)
+    const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    } else {
+        setIsAdmin(true)
+    }
+  }, [])
     return (
-        <div className='sidebar py-5'>
+        <div className={`${isAdmin ? 'sidebar py-5' : 'd-none'}`}>
             <div className="nav-items">
                 <ul className='sidebar__items'>
                     <li>
