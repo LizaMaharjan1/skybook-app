@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllRooms } from '../actionCreator/userActionCreator';
+import { getAllRooms } from '../actionCreator/roomActionCreator';
 
 const initialState:any = {
     roomData: null,

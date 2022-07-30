@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllHotels } from '../actionCreator/userActionCreator';
+import { getAllHotels } from '../actionCreator/hotelActionCreator';
 
 const initialState:any = {
     hotelData: null,
