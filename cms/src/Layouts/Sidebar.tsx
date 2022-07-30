@@ -22,13 +22,13 @@ function Sidebar() {
                         <NavLink to='/'><i className="fa-solid fa-house"></i>Dashboard</NavLink>
                     </li>
                     <li>
+                        <NavLink to='/users'><i className="fa-solid fa-user-gear"></i>User</NavLink>
+                    </li>
+                    <li>
                         <NavLink to='/hotels'><i className="fa-solid fa-hotel"></i>Hotels</NavLink>
                     </li>
                     <li>
                         <NavLink to='/rooms'><i className="fa-solid fa-person-shelter"></i>Rooms</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/users'><i className="fa-solid fa-user-gear"></i>User</NavLink>
                     </li>
                 </ul>
             </div>
