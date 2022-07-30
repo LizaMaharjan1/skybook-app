@@ -20,7 +20,6 @@ function Users() {
     <div>
       <div className="section-head">
         <h3>Users</h3>
-        <Link to='/' className='btn btn-primary'><i className="fa-solid fa-plus ms-2"></i> Add New</Link>
       </div>
       <UsersTable />
     </div>

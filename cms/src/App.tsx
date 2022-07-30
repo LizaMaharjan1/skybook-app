@@ -9,6 +9,7 @@ import Login from './Modules/Login';
 import Hotels from './Modules/Hotels';
 import Rooms from './Modules/Rooms';
 import Users from './Modules/Users';
+import UserEditForm from './Components/UserForms/UserEdit.form';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/' element={<Dashboard />} />
             <Route path='/login' element={<Login />} />
             <Route path='/users' element={<Users />} />
+            <Route path='/users/:id' element={<UserEditForm />} />
             <Route path='/hotels' element={<Hotels />} />
             <Route path='/rooms' element={<Rooms />} />
           </Routes>

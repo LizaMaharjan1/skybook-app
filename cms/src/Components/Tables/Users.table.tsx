@@ -35,7 +35,8 @@ function UsersTable() {
     dispatch(getAllUsers({}));
   }, [dispatch])
 
-  const { userData, userLoading } = useAppSelector((state) => state.usersReducer)
+  const { userData } = useAppSelector((state) => state.usersReducer)
+  
   return (
     <>
     <ConfirmationModal
@@ -64,7 +65,7 @@ function UsersTable() {
                 <td>{user.email}</td>
                 <td>{moment(user.createdAt).utc().format('YYYY-MM-DD')}</td>
                 <td>
-                  <Link to='/' className='btn btn-secondary me-3'>Edit</Link>
+                  <Link to={`/users/${user._id}`} className='btn btn-secondary me-3'>Edit</Link>
                   <Button onClick={() => {
                     setShowModal(true);
                     setUserId(user._id)

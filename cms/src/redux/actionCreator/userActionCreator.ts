@@ -9,6 +9,14 @@ export const getAllUsers = createAsyncThunk<any,any>(
     }
 )
 
+export const getUserById = createAsyncThunk<any,any>(
+    'users/getUserById',
+    async({id}) => {
+        const response = await axiosInstance.get(`/users/${id}`);
+        return response?.data
+    }
+)
+
 export const getAllHotels = createAsyncThunk<any,any>(
     'hotels/getAllHotels', 
     async() => {
