@@ -21,8 +21,6 @@ function Header() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        {/* <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link> */}
                         <NavDropdown align={'start'} title={<i className="fa-solid fa-circle-user me-2"></i>} id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Logout <i className="ms-3 fa-solid fa-arrow-right-from-bracket"></i></NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">

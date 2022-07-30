@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Table } from 'react-bootstrap'
+import { Button, Table } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import API from '../api-config'
 import Loader from '../Components/Loader/Loader'
@@ -9,6 +9,7 @@ function Hotels() {
   const navigate = useNavigate()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const fetchAllHotel = async () => {
     try {
@@ -16,6 +17,15 @@ function Hotels() {
       setData(response.data)
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  const deleteHotel = async (id: any) => {
+    try {
+      await axios.delete(`${API.hotel}/${id}`)
+      setData(data.filter((item: any) => item._id !== id))
+    } catch (error: any) {
+      setError(error)
     }
   }
 
@@ -49,16 +59,16 @@ function Hotels() {
             </thead>
             <tbody>
               {
-                data.map((item: any , index) => (
-                  <tr key={index}>
+                data.map((item: any) => (
+                  <tr key={item._id}>
                     <td>{item._id}</td>
                     <td>{item.name}</td>
                     <td>{item.type}</td>
                     <td>{item.title}</td>
                     <td>{item.city}</td>
                     <td>
-                      <Link to='/' className='btn btn-secondary me-3'>Edit</Link>
-                      <Link to='/' className='btn btn-danger'>Delete</Link>
+                      <Button variant='secondary' className='me-3'>Edit</Button>
+                      <Button onClick={deleteHotel.bind(null, item._id )} variant='danger'>Delete</Button>
                     </td>
                   </tr>
                 ))
