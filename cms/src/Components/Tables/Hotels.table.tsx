@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import axiosInstance from '../../api/axios'
 import { getAllHotels } from '../../redux/actionCreator/hotelActionCreator'
 import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks'
@@ -66,7 +67,7 @@ function HotelsTable() {
                                 <td>{hotel.title}</td>
                                 <td>{hotel.city}</td>
                                 <td>
-                                    <Button variant='secondary' className='me-3'>Edit</Button>
+                                    <Link to={`/hotels/${hotel._id}/edit`} className='btn btn-secondary me-3'>Edit</Link>
                                     <Button onClick={()=>{
                                         setShowModal(true);
                                         setHotelId(hotel._id)

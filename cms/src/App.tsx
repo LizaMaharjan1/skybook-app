@@ -11,6 +11,7 @@ import Rooms from './Modules/Rooms';
 import Users from './Modules/Users';
 import UserEditForm from './Components/UserForms/UserEdit.form';
 import CreateHotelForm from './Components/HotelForms/CreateHotel.form';
+import EditHotelForm from './Components/HotelForms/EditHotel.form';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path='/users/:id' element={<UserEditForm />} />
             <Route path='/hotels' element={<Hotels />} />
             <Route path='/hotels/create' element={<CreateHotelForm />} />
+            <Route path='/hotels/:id/edit' element={<EditHotelForm />} />
             <Route path='/rooms' element={<Rooms />} />
           </Routes>
         </main>
