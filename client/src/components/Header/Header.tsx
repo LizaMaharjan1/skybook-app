@@ -20,15 +20,14 @@ function Header() {
         <div className="d-flex align-items-center">
           <div className='navbar-toggle'>
           <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
+          {/* <Navbar.Collapse id="navbarScroll">
             <Nav
               className="ms-auto my-2 my-lg-0"
             >
               <NavLink to="/" className="nav-link">Home</NavLink>
-              {/* <NavLink to="/hotels" className="nav-link">Hotels</NavLink> */}
               <NavLink to="/contact-us" className="nav-link">Contact Us</NavLink>
             </Nav>
-          </Navbar.Collapse>
+          </Navbar.Collapse> */}
           </div>
           <div className='navbar-acc'>
             <DropdownButton variant='secondary px-2 ms-5' align='end' id="dropdown-basic-button" title={<i className="fa-solid fa-circle-user me-2"></i>}>

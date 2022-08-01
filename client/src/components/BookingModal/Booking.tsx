@@ -11,6 +11,7 @@ function Booking(props: any) {
 
     const [data, setData] = useState<any>()
     const [loading, setLoading] = useState(false)
+    const [successModal, setSuccessModal] = useState(false)
     const [error, setError] = useState()
     const [selectedRooms, setSelectedRooms] = useState<any>([])
 
@@ -18,7 +19,7 @@ function Booking(props: any) {
         setLoading(true)
         try {
             const response = await axios.get(`${API.hotel}/room/${props.hotelId}`)
-            setData(response.data)
+            setData(response?.data)
         } catch (error: any) {
             setError(error)
         }
@@ -66,14 +67,20 @@ function Booking(props: any) {
     const navigate = useNavigate()
     const completeReservation = async () => {
         try {
-            await Promise.all(selectedRooms.map((roomId: any) => {
-                const response = axios.put(`${API.room}/available/${roomId}`, { date: allDates })
-                return response    
+            await Promise.all(selectedRooms.map(async (roomId: any) => {
+                const response = await axios.put(`${API.room}/available/${roomId}`, { date: allDates })
+                if (response.status === 200) {
+                    setSuccessModal(true);
+                }
             }))
         } catch (error: any) {
             setError(error)
         }
         props.hide()
+    }
+
+    const handleBookedClose = () => {
+        setSuccessModal(false);
         navigate('/')
     }
 
@@ -89,16 +96,16 @@ function Booking(props: any) {
                     <div className="book--items">
                         <p>Select your rooms:</p>
                         {
-                            data?.map((item: any) => (
-                                <div className='book-wrapper'>
+                            data?.map((item: any, index: number) => (
+                                <div className='book-wrapper' key={index}>
                                     <div className="book--option">
-                                        <div className="book--option__title">{item.title}</div>
-                                        <div className="book--option__desc">{item.description}</div>
-                                        <div className="book--option__maxPeople">Max people: <strong>{item.maxPeople}</strong></div>
-                                        <div className="book--option__price">Price: {item.price}</div>
+                                        <div className="book--option__title">{item?.title}</div>
+                                        <div className="book--option__desc">{item?.description}</div>
+                                        <div className="book--option__maxPeople">Max people: <strong>{item?.maxPeople}</strong></div>
+                                        <div className="book--option__price">Price: {item?.price}</div>
                                     </div>
                                     <div className="book--rooms">
-                                        {item.roomNumbers.map((roomNumber: any) => (
+                                        {item?.roomNumbers.map((roomNumber: any) => (
                                             <div className="book--rooms__indiv-room">
                                                 <label>{roomNumber.number}</label>
                                                 <input type="checkbox" className='roomCheck' value={roomNumber._id} onChange={handleSelectedRooms} disabled={!isAvailable(roomNumber)} />
@@ -113,6 +120,19 @@ function Booking(props: any) {
                 <Modal.Footer>
                     <Button variant="primary" onClick={completeReservation}>
                         Reserve Now!
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={successModal} onHide={() => setSuccessModal(false)} centered className='bookingModal'>
+                <Modal.Header>
+                    <Modal.Title>Booked!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Your Booking was successfull. 
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleBookedClose}>
+                        Back to home
                     </Button>
                 </Modal.Footer>
             </Modal>
